@@ -31,10 +31,10 @@ spring:
 
 springdoc:
   api-docs:
-    path: /v3/api-docs
+    path: /users/v3/api-docs
   swagger-ui:
-    path: /swagger-ui.html
-    url: /v3/api-docs
+    path: /users/swagger-ui.html
+    url: /users/v3/api-docs
     disable-swagger-default-url: true
 
 jwt:
