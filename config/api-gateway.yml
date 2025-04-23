@@ -14,6 +14,8 @@ spring:
   cloud:
     gateway:
       routes:
+
+        # AUTH SERVICE MAIN
         - id: auth-service
           uri: lb://auth-service
           predicates:
@@ -21,12 +23,31 @@ spring:
           filters:
             - RewritePath=/auth/(?<segment>.*), /${segment}
 
+        # AUTH SERVICE SWAGGER
+        - id: auth-service-swagger
+          uri: lb://auth-service
+          predicates:
+            - Path=/auth/swagger-ui.html, /auth/swagger-ui/**, /auth/v3/api-docs
+          filters:
+            - RewritePath=/auth/(?<segment>.*), /${segment}
+            - PreserveHostHeader
+
+        # USER SERVICE MAIN
         - id: user-service
           uri: lb://user-service
           predicates:
             - Path=/users/**
           filters:
             - RewritePath=/users/(?<segment>.*), /${segment}
+
+        # USER SERVICE SWAGGER
+        - id: user-service-swagger
+          uri: lb://user-service
+          predicates:
+            - Path=/users/swagger-ui.html, /users/swagger-ui/**, /users/v3/api-docs
+          filters:
+            - RewritePath=/users/(?<segment>.*), /${segment}
+            - PreserveHostHeader
 
     discovery:
       locator:
@@ -37,3 +58,5 @@ eureka:
   client:
     service-url:
       defaultZone: http://localhost:8761/eureka
+
+

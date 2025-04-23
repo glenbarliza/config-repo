@@ -52,8 +52,8 @@ eureka:
 
 springdoc:
   api-docs:
-    path: /auth/v3/api-docs
+    path: /v3/api-docs
   swagger-ui:
-    path: /auth/swagger-ui.html
-    url: /auth/v3/api-docs
+    path: /swagger-ui.html
+    url: /v3/api-docs
     disable-swagger-default-url: true
