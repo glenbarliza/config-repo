@@ -23,6 +23,16 @@ spring:
           uri: lb://user-service
           predicates:
             - Path=/users/**
+
+        - id: auth-service-swagger
+          uri: lb://auth-service
+          predicates:
+            - Path=/auth/v3/api-docs, /auth/swagger-ui.html, /auth/swagger-ui/**
+
+        - id: user-service-swagger
+          uri: lb://user-service
+          predicates:
+            - Path=/users/v3/api-docs, /users/swagger-ui.html, /users/swagger-ui/**
     discovery:
       locator:
         enabled: true
