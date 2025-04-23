@@ -23,20 +23,6 @@ spring:
           uri: lb://user-service
           predicates:
             - Path=/users/**
-
-        - id: auth-service-swagger
-          uri: lb://auth-service
-          predicates:
-            - Path=/auth/v3/api-docs, /auth/swagger-ui.html, /auth/swagger-ui/**
-          filters:
-            - RewritePath=/auth/(?<segment>.*), /${segment}
-
-        - id: user-service-swagger
-          uri: lb://user-service
-          predicates:
-            - Path=/users/v3/api-docs, /users/swagger-ui.html, /users/swagger-ui/**
-          filters:
-            - RewritePath=/users/(?<segment>.*), /${segment}
     discovery:
       locator:
         enabled: true
@@ -46,9 +32,3 @@ eureka:
   client:
     service-url:
       defaultZone: http://localhost:8761/eureka
-
-springdoc:
-  api-docs:
-    path: /v3/api-docs
-  swagger-ui:
-    path: /swagger-ui.html
