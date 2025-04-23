@@ -18,11 +18,16 @@ spring:
           uri: lb://auth-service
           predicates:
             - Path=/auth/**
+          filters:
+            - RewritePath=/auth/(?<segment>.*), /${segment}
 
         - id: user-service
           uri: lb://user-service
           predicates:
             - Path=/users/**
+          filters:
+            - RewritePath=/users/(?<segment>.*), /${segment}
+
     discovery:
       locator:
         enabled: true
