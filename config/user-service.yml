@@ -37,7 +37,6 @@ springdoc:
     url: /v3/api-docs
     disable-swagger-default-url: true
 
-
 jwt:
   secret: c2VjcmV0LW15LWtleS1zaG91bGQtYmUtMzItYnl0ZXMtYmFzZTY0IQ==
 

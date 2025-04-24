@@ -8,8 +8,6 @@ spring:
   application:
     name: api-gateway
 
-  jwt:
-    secret: c2VjcmV0LW15LWtleS1zaG91bGQtYmUtMzItYnl0ZXMtYmFzZTY0IQ==
   cloud:
     gateway:
       routes:
@@ -29,6 +27,10 @@ spring:
       locator:
         enabled: true
         lowerCaseServiceId: true
+
+jwt:
+  secret: c2VjcmV0LW15LWtleS1zaG91bGQtYmUtMzItYnl0ZXMtYmFzZTY0IQ==
+
 
 eureka:
   client:
