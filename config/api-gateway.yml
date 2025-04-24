@@ -34,5 +34,5 @@ jwt:
 eureka:
   client:
     service-url:
-      defaultZone: http://config-server:8761/eureka
+      defaultZone: http://discovery-server:8761/eureka
 
