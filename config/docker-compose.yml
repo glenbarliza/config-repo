@@ -1,0 +1,71 @@
+version: '3.9'
+services:
+
+  config-server:
+    build: ./config-server
+    ports:
+      - "8888:8888"
+    networks:
+      - microservice-net
+    environment:
+      - SPRING_PROFILES_ACTIVE=docker
+      - EUREKA_SERVER=http://discovery-server:8761/eureka
+
+  discovery-server:
+    build: ./discovery-server
+    ports:
+      - "8761:8761"
+    networks:
+      - microservice-net
+    depends_on:
+      - config-server
+    environment:
+      - SPRING_CONFIG_IMPORT=optional:configserver:http://config-server:8888
+      - SPRING_PROFILES_ACTIVE=docker
+      - EUREKA_SERVER=http://discovery-server:8761/eureka
+
+  api-gateway:
+    build: ./api-gateway
+    ports:
+      - "8080:8080"
+    networks:
+      - microservice-net
+    depends_on:
+      - discovery-server
+      - config-server
+    environment:
+      - SPRING_CONFIG_IMPORT=optional:configserver:http://config-server:8888
+      - SPRING_PROFILES_ACTIVE=docker
+      - EUREKA_SERVER=http://discovery-server:8761/eureka
+
+  auth-service:
+    build: ./auth-service
+    ports:
+      - "8081:8081"
+    networks:
+      - microservice-net
+    depends_on:
+      - discovery-server
+      - config-server
+    environment:
+      - SPRING_CONFIG_IMPORT=optional:configserver:http://config-server:8888
+      - SPRING_PROFILES_ACTIVE=docker
+      - EUREKA_SERVER=http://discovery-server:8761/eureka
+
+  user-service:
+    build: ./user-service
+    ports:
+      - "8082:8082"
+    networks:
+      - microservice-net
+    depends_on:
+      - discovery-server
+      - config-server
+    environment:
+      - SPRING_CONFIG_IMPORT=optional:configserver:http://config-server:8888
+      - SPRING_PROFILES_ACTIVE=docker
+      - EUREKA_SERVER=http://discovery-server:8761/eureka
+
+networks:
+  microservice-net:
+    driver: bridge
