@@ -51,6 +51,5 @@ eureka:
   instance:
     instance-id: ${spring.application.name}:${random.uuid}
     prefer-ip-address: true
-    ip-address: 127.0.0.1
     metadata-map:
       port: ${server.port}
